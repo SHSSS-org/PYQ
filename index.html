@@ -85,17 +85,35 @@
             color: white;
             border-radius: 10px;
             margin: 30px 0;
+            position: relative;
+            overflow: hidden;
         }
         
         .page-header h2 {
             font-size: 36px;
             margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
         }
         
         .page-header p {
             font-size: 18px;
             max-width: 700px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><text x="50%" y="50%" font-size="20" text-anchor="middle" dominant-baseline="middle" fill="white">PYQ</text></svg>');
+            background-size: 200px;
+            opacity: 0.1;
         }
         
         /* Grade Selector */
@@ -120,6 +138,7 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         
         .grade-btn.active {
@@ -130,6 +149,8 @@
         .grade-btn:hover {
             background: #ff385c;
             color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         /* Filter Section */
@@ -165,6 +186,11 @@
             font-size: 16px;
             outline: none;
             min-width: 150px;
+            transition: border-color 0.3s;
+        }
+        
+        .filter-group select:focus {
+            border-color: #ff385c;
         }
         
         /* PYQ Container */
@@ -227,6 +253,12 @@
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .subject-header {
@@ -269,12 +301,16 @@
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
         }
         
         .download-btn:hover {
             background: #ff385c;
             color: white;
             border-color: #ff385c;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
         
         .download-btn:hover .file-size {
@@ -324,6 +360,18 @@
             display: none;
             z-index: 1000;
             max-width: 400px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
         
         .notification.error {
@@ -456,10 +504,17 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="https://shsss-org.github.io/home/#"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="https://shsss-org.github.io/books_pdf/" class="active"><i class="fas fa-book"></i> Books PDF</a></li>
-                        <li><a href="https://shsss-org.github.io/about_us/"><i class="fas fa-info-circle"></i> About Us</a></li>
-                        <li><a href="https://shsss-org.github.io/contact_us/"><i class="fas fa-user-graduate"></i> Contact us</a></li>
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="books_pdf.html"><i class="fas fa-book"></i> Books PDF</a></li>
+                        <li><a href="professionals.html"><i class="fas fa-user-tie"></i> Professionals</a></li>
+                        <li><a href="lost_found.html"><i class="fas fa-search"></i> Lost & Found</a></li>
+                        <li><a href="messages.html"><i class="fas fa-comments"></i> Messages</a></li>
+                        <li><a href="doubts.html"><i class="fas fa-question-circle"></i> Doubts</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                        <li><a href="exams.html"><i class="fas fa-calendar-alt"></i> Exams</a></li>
+                        <li><a href="#" class="active"><i class="fas fa-download"></i> PYQs</a></li>
+                    </ul>
                 </nav>
             </div>
         </div>
@@ -494,6 +549,13 @@
                         <option value="biology">Biology</option>
                         <option value="english">English</option>
                         <option value="computer">Computer Science</option>
+                        <option value="commerce">Commerce</option>
+                        <option value="arts">Arts</option>
+                        <option value="humanities">Humanities</option>
+                        <option value="urdu_elective">Urdu (Elective)</option>
+                        <option value="urdu_elementry">Urdu (Elementary)</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="physical_education">Physical Education</option>
                     </select>
                 </div>
                 
@@ -545,7 +607,7 @@
                         <div class="subject-name">Physics</div>
                     </div>
                     <div class="download-options">
-                        <div class="download-btn" data-file="physics_2023_final.pdf" data-size="2.4 MB">
+                        <a href="#" class="download-btn" data-file="physics_2023_final.pdf" data-size="2.4 MB">
                             <div class="file-info">
                                 <div class="file-type">
                                     <i class="fas fa-file-pdf"></i>
@@ -556,9 +618,9 @@
                                 </div>
                             </div>
                             <i class="fas fa-download"></i>
-                        </div>
+                        </a>
                         
-                        <div class="download-btn" data-file="physics_2022_final.pdf" data-size="2.1 MB">
+                        <a href="#" class="download-btn" data-file="physics_2022_final.pdf" data-size="2.1 MB">
                             <div class="file-info">
                                 <div class="file-type">
                                     <i class="fas fa-file-pdf"></i>
@@ -569,429 +631,13 @@
                                 </div>
                             </div>
                             <i class="fas fa-download"></i>
-                        </div>
+                        </a>
                         
-                        <div class="download-btn" data-file="physics_2023_midterm.pdf" data-size="1.8 MB">
+                        <a href="#" class="download-btn" data-file="physics_2023_midterm.pdf" data-size="1.8 MB">
                             <div class="file-info">
                                 <div class="file-type">
                                     <i class="fas fa-file-pdf"></i>
                                 </div>
                                 <div class="file-details">
                                     <div class="file-name">2023 Mid-Term</div>
-                                    <div class="file-size">1.8 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Chemistry -->
-                <div class="subject-card" data-subject="chemistry">
-                    <div class="subject-header">
-                        <div class="subject-icon">
-                            <i class="fas fa-flask"></i>
-                        </div>
-                        <div class="subject-name">Chemistry</div>
-                    </div>
-                    <div class="download-options">
-                        <div class="download-btn" data-file="chemistry_2023_final.pdf" data-size="2.7 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2023 Final Exam</div>
-                                    <div class="file-size">2.7 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                        
-                        <div class="download-btn" data-file="chemistry_2022_final.pdf" data-size="2.3 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2022 Final Exam</div>
-                                    <div class="file-size">2.3 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                               
-                        <div class="download-btn" data-file="chemistry_2023_midterm.pdf" data-size="1.9 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2023 Mid-Term</div>
-                                    <div class="file-size">1.9 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Mathematics -->
-                <div class="subject-card" data-subject="mathematics">
-                    <div class="subject-header">
-                        <div class="subject-icon">
-                            <i class="fas fa-square-root-alt"></i>
-                        </div>
-                        <div class="subject-name">Mathematics</div>
-                    </div>
-                    <div class="download-options">
-                        <div class="download-btn" data-file="mathematics_2023_final.pdf" data-size="3.1 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2023 Final Exam</div>
-                                    <div class="file-size">3.1 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                        
-                        <div class="download-btn" data-file="mathematics_2022_final.pdf" data-size="2.8 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2022 Final Exam</div>
-                                    <div class="file-size">2.8 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                        
-                        <div class="download-btn" data-file="mathematics_2021_final.pdf" data-size="2.6 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2021 Final Exam</div>
-                                    <div class="file-size">2.6 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Biology -->
-                <div class="subject-card" data-subject="biology">
-                    <div class="subject-header">
-                        <div class="subject-icon">
-                            <i class="fas fa-dna"></i>
-                        </div>
-                        <div class="subject-name">Biology</div>
-                    </div>
-                    <div class="download-options">
-                        <div class="download-btn" data-file="biology_2023_final.pdf" data-size="2.9 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2023 Final Exam</div>
-                                    <div class="file-size">2.9 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                        
-                        <div class="download-btn" data-file="biology_2022_final.pdf" data-size="2.5 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2022 Final Exam</div>
-                                    <div class="file-size">2.5 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                        
-                        <div class="download-btn" data-file="biology_2023_midterm.pdf" data-size="2.0 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2023 Mid-Term</div>
-                                    <div class="file-size">2.0 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- English -->
-                <div class="subject-card" data-subject="english">
-                    <div class="subject-header">
-                        <div class="subject-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="subject-name">English</div>
-                    </div>
-                    <div class="download-options">
-                        <div class="download-btn" data-file="english_2023_final.pdf" data-size="1.7 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2023 Final Exam</div>
-                                    <div class="file-size">1.7 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                        
-                        <div class="download-btn" data-file="english_2022_final.pdf" data-size="1.5 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2022 Final Exam</div>
-                                    <div class="file-size">1.5 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                        
-                        <div class="download-btn" data-file="english_2021_final.pdf" data-size="1.6 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2021 Final Exam</div>
-                                    <div class="file-size">1.6 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Computer Science -->
-                <div class="subject-card" data-subject="computer">
-                    <div class="subject-header">
-                        <div class="subject-icon">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
-                        <div class="subject-name">Computer Science</div>
-                    </div>
-                    <div class="download-options">
-                        <div class="download-btn" data-file="computer_science_2023_final.pdf" data-size="2.2 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2023 Final Exam</div>
-                                    <div class="file-size">2.2 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                        
-                        <div class="download-btn" data-file="computer_science_2022_final.pdf" data-size="2.0 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2022 Final Exam</div>
-                                    <div class="file-size">2.0 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                        
-                        <div class="download-btn" data-file="computer_science_2023_preboard.pdf" data-size="1.8 MB">
-                            <div class="file-info">
-                                <div class="file-type">
-                                    <i class="fas fa-file-pdf"></i>
-                                </div>
-                                <div class="file-details">
-                                    <div class="file-name">2023 Pre-Board</div>
-                                    <div class="file-size">1.8 MB</div>
-                                </div>
-                            </div>
-                            <i class="fas fa-download"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>SHSSS Headlines</h3>
-                    <p>Access quality educational resources</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <a href="#">Home</a>
-                    <a href="books_pdf.html">Books PDF</a>
-                    <a href="professionals.html">Professionals</a>
-                    <a href="lost_found.html">Lost & Found</a>
-                    <a href="messages.html">Messages</a>
-                    <a href="doubts.html">Doubts</a>
-                    <a href="about.html">About Us</a>
-                    <a href="contact.html">Contact</a>
-                    <a href="exams.html">Exams</a>
-                    <a href="#">PYQs</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-envelope"></i> pyq@shsss-headlines.edu</p>
-                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 SHSSS Headlines. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // DOM elements
-        const gradeButtons = document.querySelectorAll('.grade-btn');
-        const yearButtons = document.querySelectorAll('.year-btn');
-        const downloadButtons = document.querySelectorAll('.download-btn');
-        const subjectFilter = document.getElementById('subject-filter');
-        const yearFilter = document.getElementById('year-filter');
-        const typeFilter = document.getElementById('type-filter');
-        const notification = document.getElementById('notification');
-        const pyqGrid = document.getElementById('pyqGrid');
-        
-        // Set current grade and year
-        let currentGrade = "11";
-        let currentYear = "all";
-        let currentSubject = "all";
-        let currentType = "all";
-        
-        // Add event listeners to grade buttons
-        gradeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                gradeButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                currentGrade = this.dataset.grade;
-                filterPYQs();
-            });
-        });
-        
-        // Add event listeners to year buttons
-        yearButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                yearButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                currentYear = this.dataset.year;
-                filterPYQs();
-            });
-        });
-        
-        // Add event listeners to filter dropdowns
-        subjectFilter.addEventListener('change', function() {
-            currentSubject = this.value;
-            filterPYQs();
-        });
-        
-        yearFilter.addEventListener('change', function() {
-            currentYear = this.value;
-            filterPYQs();
-        });
-        
-        typeFilter.addEventListener('change', function() {
-            currentType = this.value;
-            filterPYQs();
-        });
-        
-        // Add event listeners to download buttons
-        downloadButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const fileName = this.dataset.file;
-                const fileSize = this.dataset.size;
-                initiateDownload(fileName, fileSize);
-            });
-        });
-        
-        // Filter PYQs based on selections
-        function filterPYQs() {
-            const subjectCards = document.querySelectorAll('.subject-card');
-            
-            subjectCards.forEach(card => {
-                const subject = card.dataset.subject;
-                let shouldShow = true;
-                
-                // Subject filter
-                if (currentSubject !== 'all' && subject !== currentSubject) {
-                    shouldShow = false;
-                }
-                
-                // Additional filtering logic can be added here for year and type
-                
-                card.style.display = shouldShow ? 'block' : 'none';
-            });
-        }
-        
-        // Initiate download
-        function initiateDownload(fileName, fileSize) {
-            // In a real implementation, this would trigger the actual download
-            // For demonstration, we'll show a notification
-            
-            showNotification(`Preparing download for: ${fileName} (${fileSize})`);
-            
-            // Simulate download preparation delay
-            setTimeout(() => {
-                showNotification(`Download started for: ${fileName}`, "success");
-                
-                // In a real implementation, you would use something like:
-                // window.location.href = `/downloads/${fileName}`;
-                // or create a temporary link element to trigger download
-            }, 1500);
-        }
-        
-        // Show notification
-        function showNotification(message, type = "success") {
-            notification.textContent = message;
-            notification.className = type === "success" ? "notification" : "notification error";
-            notification.style.display = "block";
-            
-            setTimeout(() => {
-                notification.style.display = "none";
-            }, 3000);
-        }
-        
-        // Initialize
-        filterPYQs();
-    </script>
-</body>
-</html>
+         
